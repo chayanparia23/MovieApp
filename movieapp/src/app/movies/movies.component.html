@@ -1,0 +1,63 @@
+<form id="searchForm" #searchForm="ngForm" (ngSubmit)="search()">
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="form-group">
+          <label for="searchText">Search</label>
+          <input class="form-control" type="text" [(ngModel)]="userParams.searchText" name="searchText" id="searchText" required/>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="form-group">
+          <label for="searchTextType">Search Type</label>
+          <select class="form-control" name="searchTextType" id="searchTextType" [(ngModel)]="userParams.searchTextType" required>
+            <option value="Title">Title</option>
+            <option value="Year">Year</option>
+            <option value="Plot">Plot</option>
+            <option value="Genre">Genre</option>
+            <option value="Actor">Actor</option>
+            <option value="Director">Director</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-sm-4 mt-30">
+        <button class="btn btn-primary" type="submit" [disabled]="!searchForm.valid"><i class="fa fa-search" aria-hidden="true"></i></button>
+        <button class="btn btn-info ml-2" type="button" (click)="reset()"><i class="fa fa-refresh" aria-hidden="true"></i></button>
+      </div>
+    </div>
+  </form>
+  
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Movie Image</th>
+      <th scope="col">Year</th>
+      <th scope="col">Title</th>
+      <th scope="col">Plot</th>
+      <th scope="col">Rating</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let movie of movies; index as i" style="cursor: pointer;" (click)="showDetails(movie.id)">
+      <th scope="row">{{ i + 1 }}</th>
+      <td>
+        <img src="{{movie.imageUrl || './assets/movie.png'}}" class="mr-2" style="width: 20px">
+      </td>
+      <td>{{ movie.year }}</td>
+      <td>{{ movie.title }}</td>
+      <td>{{ movie.plot }}</td>
+      <td>{{ movie.rating }}</td>
+    </tr>
+    </tbody>
+  </table>
+  
+  <div class="d-flex justify-content-center" *ngIf="pagination">
+    <pagination [boundaryLinks]="true" 
+        [totalItems]="pagination.totalItems"
+        [itemsPerPage]="pagination.itemsPerPage"
+        [(ngModel)]="pagination.currentPage"
+        (pageChanged)="pageChanged($event)"
+        [maxSize]="paginationMaxSize"
+            previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
+    </pagination>
+  </div>

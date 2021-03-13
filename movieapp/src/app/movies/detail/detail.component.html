@@ -1,0 +1,63 @@
+<button class="btn btn-primary" (click)="backTomovieList()"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
+<div class="row">
+    <div class="col-sm-4">
+        <div class="card">
+            <img src="{{selectedMovie.imageUrl || './assets/movie.png'}}" alt="{{selectedMovie.title}}" class="card-img-top img-thumbnail" />
+            <div class="card-body">
+                <div>
+                    <strong>Title:</strong>
+                    <p>{{selectedMovie.title}}</p>
+                </div>
+                <div>
+                    <strong>Year:</strong>
+                    <p>{{selectedMovie.year}}</p>
+                </div>
+                <div>
+                    <strong>Released Date:</strong>
+                    <p>{{selectedMovie.releasedDate | date:'yyyy-MM-dd'}}</p>
+                </div>
+                <div>
+                    <strong>Rating:</strong>
+                    <p>{{selectedMovie.rating}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-8">
+        <div class="card">
+            <div class="card-body">
+                <div>
+                    <strong>Rank:</strong>
+                    <p>{{selectedMovie.rank}}</p>
+                </div>
+                <div>
+                    <strong>Running Time:</strong>
+                    <p>{{selectedMovie.rating}}</p>
+                </div>
+                <div>
+                    <strong>Director:</strong>
+                    <ul *ngFor="let director of selectedMovie.directors">
+                        <li>{{director}}</li>
+                    </ul>
+                </div>
+                <div>
+                    <strong>Actors:</strong>
+                    <ul *ngFor="let actor of selectedMovie.actors">
+                        <li>{{actor}}</li>
+                    </ul>
+                </div>
+                <div>
+                    <strong>Genres:</strong>
+                    <ul *ngFor="let genre of selectedMovie.genres">
+                        <li>{{genre}}</li>
+                    </ul>
+                </div>
+                <div>
+                    <strong>Plot:</strong>
+                    <p>{{selectedMovie.plot}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
